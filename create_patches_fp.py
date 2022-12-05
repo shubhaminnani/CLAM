@@ -243,6 +243,8 @@ parser.add_argument('--preset', default=None, type=str,
 					help='predefined profile of default segmentation and filter parameters (.csv)')
 parser.add_argument('--patch_level', type=int, default=0, 
 					help='downsample level at which to patch')
+parser.add_argument('--custom_downsample', type= int, choices=[1,2], default=1, 
+					help='custom downscale when native downsample is not available (only tested w/ 2x downscale)')
 parser.add_argument('--process_list',  type = str, default=None,
 					help='name of list of images to process with parameters (.csv)')
 
@@ -305,6 +307,6 @@ if __name__ == '__main__':
 	seg_times, patch_times = seg_and_patch(**directories, **parameters,
 											patch_size = args.patch_size, step_size=args.step_size, 
 											seg = args.seg,  use_default_params=False, save_mask = True, 
-											stitch= args.stitch,
+											stitch= args.stitch,custom_downsample = args.custom_downsample,
 											patch_level=args.patch_level, patch = args.patch,
 											process_list = process_list, auto_skip=args.no_auto_skip)
